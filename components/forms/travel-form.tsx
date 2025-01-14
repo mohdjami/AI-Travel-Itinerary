@@ -375,7 +375,7 @@ export default function TravelItineraryForm({
           </motion.div>
         )}
       </AnimatePresence>
-      <RequestCredits email={email} />
+    { initialCredits ? <></>: <RequestCredits email={email} /> }
     </main>
   );
 }
