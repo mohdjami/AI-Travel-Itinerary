@@ -17,6 +17,7 @@ import { toast } from "@/hooks/use-toast";
 import { jsPDF } from "jspdf";
 import "leaflet/dist/leaflet.css";
 import dynamic from "next/dynamic";
+
 const MapComponent = dynamic(
   () => import("@/components/map-component").then((mod) => mod.MapComponent),
   {

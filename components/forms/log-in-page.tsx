@@ -29,7 +29,7 @@ const loginSchema = z.object({
   }),
 });
 
-export default function LoginPage({ message }: { message?: string }) {
+export default function LoginPage({ data }: { data?: any }) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const form = useForm<z.infer<typeof loginSchema>>({
@@ -44,17 +44,45 @@ export default function LoginPage({ message }: { message?: string }) {
     try {
       setIsLoading(true);
       const supabase = createClient();
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const { data: authData, error } = await supabase.auth.signInWithPassword({
         email: values.email,
         password: values.password,
       });
+      const { session, user } = authData || {};
       if (error) {
         setIsLoading(false);
         toast({
           title: "Login failed",
           description: error.message,
         });
+        if(data.redirectUrl) {
+          router.push(`/login?message=${error.message}&redirectUrl=${data.redirectUrl}`);
+        }
       } else {
+        // router.push(`${} \\/itinerary`);
+        if(data.redirectUri) {
+          const response = await fetch(data.redirectUrl + `/api/auth`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            accessToken: session?.access_token,
+            user,
+          }),
+        });
+        //response = await response.json();
+        if (!response.ok) {
+          const resData = await response.json();
+          toast({
+            title: "Service Authentication Failed",
+            description: resData.message,
+            variant: "destructive",
+          });
+          return;
+        }
+        router.push(data.redirectUrl);
+      }
         router.push("/itinerary");
         router.refresh();
         toast({
@@ -136,9 +164,9 @@ export default function LoginPage({ message }: { message?: string }) {
           Sign up
         </Link>
       </p>
-      {message && (
+      {data.message && (
         <div className="bg-red-100 p-4 text-red-700 rounded-md text-sm">
-          {message}
+          {data.message}
         </div>
       )}
     </div>

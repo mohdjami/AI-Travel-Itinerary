@@ -34,6 +34,7 @@
     "date-fns": "^3.6.0",
     "framer-motion": "^11.5.6",
     "ics": "^3.8.0",
+    "ioredis": "^5.4.2",
     "jspdf": "^2.5.2",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.445.0",
