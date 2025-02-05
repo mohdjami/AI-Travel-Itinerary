@@ -1,0 +1,39 @@
+# Core FastAPI
+fastapi
+uvicorn
+python-dotenv
+pydantic
+
+# Vector Store & Embeddings  
+pinecone-client
+sentence-transformers
+
+# LangChain Ecosystem
+langchain-community
+langchain-core
+langchain-groq
+langchain-google-genai
+langgraph
+
+# LLMs
+google-generativeai
+groq
+
+# Search & Web Tools
+duckduckgo-search
+firecrawl
+beautifulsoup4
+
+# Location & Mapping
+geopy
+overpy
+requests
+
+# Utilities
+python-jose[cryptography]
+aiohttp
+numpy
+pandas
+
+tqdm
+torch
