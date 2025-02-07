@@ -57,6 +57,12 @@ export default async function Navbar({ isLoggedIn, user }: NavbarProps) {
               >
                 Itinerary
               </Link>
+              <Link
+                href="https://github.com/mohdjami/AI-Travel-Itinerary/tree/main/multi-agent"
+                className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-900"
+              >
+                Multi-Agent Code
+              </Link>
 
               <Link
                 href="/dashboard"
